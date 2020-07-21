@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { LOGIN_STATUS } from "../data/AuthData";
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import { Person, Key, Link45deg } from 'react-bootstrap-icons';
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { Person, Key, Link45deg } from "react-bootstrap-icons";
 
 export class NavBar extends React.Component {
     render() {        
