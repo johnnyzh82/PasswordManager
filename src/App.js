@@ -1,8 +1,9 @@
 import React from "react";
-import { LOGIN_STATUS, loginPopup, LOGIN_SCOPES } from "./data/AuthData";
+import { LOGIN_STATUS, acquireToken, loginPopup, LOGIN_SCOPES, ARM_SCOPES } from "./data/AuthData";
 import { WelcomeCarousel } from "./components/WelcomeCarousel";
 import { NavBar } from "./components/NavBar";
 import { ErrorAlert } from "./components/ErrorAlert";
+import { MainFrame } from "./components/MainFrame";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -15,6 +16,7 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
     this.state = {
       loginStatus: LOGIN_STATUS.NOT_LOGIN,
+      accessToken: null,
       errorMessage: null,
     };
   }
@@ -24,8 +26,11 @@ class App extends React.Component {
       this.setState({ loginStatus: LOGIN_STATUS.IN_PROGRESS });
       const loginResponse = await loginPopup(LOGIN_SCOPES);
       console.log("loginResponse", loginResponse);
+      const tokenResponse = await acquireToken(ARM_SCOPES);
+      console.log("tokenResponse", tokenResponse);
       this.setState({
         loginStatus: LOGIN_STATUS.LOGIN_SUCCESS,
+        accessToken: tokenResponse.accessToken,
         errorMessage: null,
       });
     } catch (error) {
@@ -55,7 +60,9 @@ class App extends React.Component {
                 login={this.login} 
                 logout={this.logout} />
         <ErrorAlert errorMessage={this.state.errorMessage} />
-        <WelcomeCarousel />
+        <WelcomeCarousel loginStatus={this.state.loginStatus} />
+        <MainFrame loginStatus={this.state.loginStatus}
+                   accessToken={this.state.accessToken} />
       </div>
     );
   }

@@ -50,9 +50,11 @@ export const loginPopup = (scope) => {
  * Make a silent request to get the access token
  * @param {string[]} scope 
  */
-export const acquireToken = async (scope) => {
+export const acquireToken = (scope) => {
     try {
-        return msalInstance.acquireTokenSilent(scope);
+        return msalInstance.acquireTokenSilent({
+            scopes: scope
+        });
     }
     catch (err) {
         if (err.name === "InteractionRequiredAuthError") {

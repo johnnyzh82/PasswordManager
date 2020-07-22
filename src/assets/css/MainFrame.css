@@ -1,0 +1,11 @@
+.dropdown-basic-button {
+    width: 40%;
+}
+
+.dropdown-basic-button > button {
+    width: 100%;
+}
+
+.container .card {
+    height: 100%;
+}

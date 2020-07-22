@@ -5,9 +5,9 @@ export class ErrorAlert extends React.Component {
     render() {
         return (
             !!this.props.errorMessage &&
-            <p className="d-block p-2">
+            <div className="d-block p-2 mt-2">
                 <Alert variant="danger">{ this.props.errorMessage }</Alert>
-            </p>
+            </div>
         );
     }
 }
